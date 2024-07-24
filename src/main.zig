@@ -2,6 +2,7 @@ const std = @import("std");
 const app = @import("app/app.zig").app;
 const eql = std.mem.eql;
 const style = @import("utils/style.zig").Style;
+const api = @import("api/index.zig");
 
 const version = "0.1.0";
 
@@ -64,7 +65,11 @@ pub fn main() !void {
                         if (idx + 2 >= args.len) {
                             return std.debug.print("{s}Error: \"-{c}\" flag requires an argument\n{s}", .{ style.Red, flag, style.Reset });
                         }
-                        if (flag == 's') cli.search = args[idx + 2];
+                        if (flag == 's') {
+                            cli.search = args[idx + 2];
+
+                            return try api.search(cli.search);
+                        }
                         if (flag == 'l') cli.limit = try std.fmt.parseInt(u32, args[idx + 2], 10);
                     },
                     else => return std.debug.print("{s}Error: Unknown flag \"-{c}\"\n{s}", .{ style.Red, flag, style.Reset }),
