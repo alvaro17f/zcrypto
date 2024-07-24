@@ -1,42 +1,42 @@
-# passback
+# zcrypto
 
-![](vhs/passback.gif)
+![](vhs/zcrypto.gif)
 
-passback is a command line tool for managing NixOS configuration.
+zcrypto is a command line tool for watching crypto coin prices.
 
 > :warning: **Work in Progress**: This project is currently under development. Some features may not be complete and may change in the future.
 ## Installation
 
-To install passback, you can clone the repository and compile the source code:
+To install zcrypto, you can clone the repository and compile the source code:
 
 ```sh
-git clone https://github.com/alvaro17f/passback.git
-cd passback
+git clone https://github.com/alvaro17f/zcrypto.git
+cd zcrypto
 zig build run
 ```
 
 then move the binary to a directory in your PATH:
 
 ```sh
-sudo mv zig-out/bin/passback <PATH>
+sudo mv zig-out/bin/zcrypto <PATH>
 ```
 
 ### NixOS
 
 #### Run
-To run passback, you can use the following command:
+To run zcrypto, you can use the following command:
 
 ```sh
-nix run github:alvaro17f/passback#target.x86_64-linux-musl
+nix run github:alvaro17f/zcrypto#target.x86_64-linux-musl
 ```
 
 #### Flake
-Add passback to your flake.nix file:
+Add zcrypto to your flake.nix file:
 
 ```nix
 {
     inputs = {
-        passback.url = "github:alvaro17f/passback";
+        zcrypto.url = "github:alvaro17f/zcrypto";
     };
 }
 ```
@@ -47,7 +47,7 @@ then include it in your system configuration:
 { inputs, pkgs, ... }:
 {
     home.packages = [
-        inputs.passback.packages.${pkgs.system}.default
+        inputs.zcrypto.packages.${pkgs.system}.default
     ];
 }
 ```
@@ -55,10 +55,9 @@ then include it in your system configuration:
 ## Usage
 ```sh
  ***************************************************
- PASSBACK - A tool to backup your keepass database
+ ZCRYPTO - A tool to watch crypto coin prices
  ***************************************************
- -d : USB devices to backup to
- -p : Path to keepass db (default is ~/keepass)
+ -s : coin to search
  -h, help : Display this help message
  -v, version : Display the current version
 
@@ -66,4 +65,4 @@ then include it in your system configuration:
 
 
 ## License
-passback is distributed under the MIT license. See the LICENSE file for more information.
+zcrypto is distributed under the MIT license. See the LICENSE file for more information.

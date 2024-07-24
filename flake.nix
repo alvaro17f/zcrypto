@@ -29,7 +29,7 @@
         # The package won't be usable inside nix.
         zigDisableWrap = true;
       } // optionalAttrs (!pathExists ./build.zig.zon) {
-        pname = "passback";
+        pname = "zcrypto";
         version = "0.1.0";
       }));
 
