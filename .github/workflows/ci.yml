@@ -13,10 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout
 
     - name: Setup Zig
-      uses: goto-bus-stop/setup-zig@v2
+      uses: goto-bus-stop/setup-zig
       with:
         version: master
 
@@ -24,7 +24,7 @@ jobs:
       run: zig build -Doptimize=ReleaseSafe -Dtarget=${{ matrix.target }}
 
     - name: Archive executable
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact
       with:
         name: zcrypto
         path: zig-out/bin/*
