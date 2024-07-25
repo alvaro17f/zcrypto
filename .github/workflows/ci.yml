@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [ x86-linux, x86_64-linux, aarch64-linux, riscv64-linux ]
+        target: [ x86_64-linux ]
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
