@@ -7,10 +7,10 @@ tasks:
       - task: run
   build:
     cmds:
-      - zig build .
+      - zig build
   run:
     cmds:
-      - ./zig-out/passback {{.CLI_ARGS}}
+      - ./zig-out/bin/zcrypto {{.CLI_ARGS}}
   vhs:
     cmds:
-      - vhs ./vhs/passback.tape
+      - vhs ./vhs/zcrypto.tape
