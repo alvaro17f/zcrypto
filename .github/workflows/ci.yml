@@ -44,8 +44,16 @@ jobs:
                   "labels": ["fix", "bug"]
               },
               {
+                  "title": "## Tests",
+                  "labels": ["test"]
+              }
+              {
+                  "title": "## Style",
+                  "labels": ["style"]
+              }
+              {
                   "title": "## Other",
-                  "labels": []
+                  "labels": ["ci", "chore", "docs", "refactor", "perf"]
               }
             ],
             "label_extractor": [
