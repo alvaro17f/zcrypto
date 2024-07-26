@@ -33,6 +33,7 @@ jobs:
         commitMode: true
         configurationJson: |
           {
+            "pr_template": "",
             "categories": [
               {
                 "title": "## 🚨 Breaking Changes",
