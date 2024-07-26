@@ -37,24 +37,44 @@ jobs:
             "pr_template": "",
             "categories": [
               {
-                  "title": "## Feature",
+                  "title": "## 🚨 Breaking Changes",
+                  "labels": ["*!"]
+              }
+              {
+                  "title": "## 🚀 Feature",
                   "labels": ["feat", "feature"]
               },
               {
-                  "title": "## Fix",
+                  "title": "## 🐛 Fix",
                   "labels": ["fix", "bug"]
               },
               {
-                  "title": "## Tests",
+                  "title": "## ♻️ Refactor",
+                  "labels": ["refactor"]
+              }
+              {
+                  "title": "## 🧪 Tests",
                   "labels": ["test"]
               }
               {
-                  "title": "## Style",
+                  "title": "## 💄 Style",
                   "labels": ["style"]
               }
               {
-                  "title": "## Other",
-                  "labels": ["ci", "chore", "docs", "refactor", "perf"]
+                  "title": "## 📝 Docs",
+                  "labels": ["docs"]
+              }
+              {
+                  "title": "## 🚧 Chore",
+                  "labels": ["chore"]
+              }
+              {
+                  "title": "## 🚀 Performance",
+                  "labels": ["perf"]
+              }
+              {
+                  "title": "## 👷 CI",
+                  "labels": ["ci"]
               }
             ],
             "label_extractor": [
