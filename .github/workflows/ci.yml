@@ -33,48 +33,46 @@ jobs:
         commitMode: true
         configurationJson: |
           {
-            "template": "#{{CHANGELOG}}",
-            "pr_template": "",
             "categories": [
               {
-                  "title": "## 🚨 Breaking Changes",
-                  "labels": ["*!"]
-              }
-              {
-                  "title": "## 🚀 Feature",
-                  "labels": ["feat", "feature"]
+                "title": "## 🚨 Breaking Changes",
+                "labels": ["*!"]
               },
               {
-                  "title": "## 🐛 Fix",
-                  "labels": ["fix", "bug"]
+                "title": "## 🚀 Feature",
+                "labels": ["feat", "feature"]
               },
               {
-                  "title": "## ♻️ Refactor",
-                  "labels": ["refactor"]
-              }
+                "title": "## 🐛 Fix",
+                "labels": ["fix", "bug"]
+              },
               {
-                  "title": "## 🧪 Tests",
-                  "labels": ["test"]
-              }
+                "title": "## ♻️ Refactor",
+                "labels": ["refactor"]
+              },
               {
-                  "title": "## 💄 Style",
-                  "labels": ["style"]
-              }
+                "title": "## 🧪 Tests",
+                "labels": ["test"]
+              },
               {
-                  "title": "## 📝 Docs",
-                  "labels": ["docs"]
-              }
+                "title": "## 💄 Style",
+                "labels": ["style"]
+              },
               {
-                  "title": "## 🚧 Chore",
-                  "labels": ["chore"]
-              }
+                "title": "## 📝 Docs",
+                "labels": ["docs"]
+              },
               {
-                  "title": "## 🚀 Performance",
-                  "labels": ["perf"]
-              }
+                "title": "## 🚧 Chore",
+                "labels": ["chore"]
+              },
               {
-                  "title": "## 👷 CI",
-                  "labels": ["ci"]
+                "title": "## 🚀 Performance",
+                "labels": ["perf"]
+              },
+              {
+                "title": "## 👷 CI",
+                "labels": ["ci"]
               }
             ],
             "label_extractor": [
@@ -82,7 +80,7 @@ jobs:
                 "pattern": "^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test){1}(\\([\\w\\-\\.]+\\))?(!)?: ([\\w ])+([\\s\\S]*)",
                 "target": "$1"
               }
-            ],
+            ]
           }
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
