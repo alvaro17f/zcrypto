@@ -64,11 +64,11 @@ jobs:
                 "labels": ["docs"]
               },
               {
-                "title": "## 🚧 Chore",
+                "title": "## 🔨 Chore",
                 "labels": ["chore"]
               },
               {
-                "title": "## 🚀 Performance",
+                "title": "## ⚡️ Performance",
                 "labels": ["perf"]
               },
               {
