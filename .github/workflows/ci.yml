@@ -31,6 +31,7 @@ jobs:
       uses: mikepenz/release-changelog-builder-action@v5
       with:
         commitMode: true
+        fetchViaCommits: true
         configurationJson: |
           {
             "categories": [
