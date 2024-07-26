@@ -66,4 +66,3 @@ then include it in your system configuration:
 
 ## License
 zcrypto is distributed under the MIT license. See the LICENSE file for more information.
-
