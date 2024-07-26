@@ -28,10 +28,9 @@ jobs:
 
     - name: Build Changelog
       id: build_changelog
-      uses: mikepenz/release-changelog-builder-action@v5
+      uses: mikepenz/release-changelog-builder-action@develop
       with:
         commitMode: true
-        fetchViaCommits: true
         configurationJson: |
           {
             "categories": [
