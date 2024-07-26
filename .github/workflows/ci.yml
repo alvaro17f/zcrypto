@@ -33,6 +33,7 @@ jobs:
         commitMode: true
         configurationJson: |
           {
+            "pr_template": "- #{{TITLE}}",
             "categories": [
               {
                 "title": "## 🚨 Breaking Changes",
@@ -78,15 +79,8 @@ jobs:
             "label_extractor": [
               {
                 "method": "regexr",
-                "pattern": ".*!.*|^breaking:.*",
-                "target": "breaking"
-                "on_property": "title" 
-              },
-              {
-                "method": "regexr",
                 "pattern": "^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test){1}(\\([\\w\\-\\.]+\\))?(: ([\\w ])+([\\s\\S]*))?",
                 "target": "$1",
-                "on_property": "title" 
               }
             ]
           }
