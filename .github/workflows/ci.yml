@@ -77,7 +77,7 @@ jobs:
             ],
             "label_extractor": [
               {
-                "pattern": ".*!.*",
+                "pattern": ".*!.*|^breaking:.*",
                 "target": "breaking"
               },
               {
