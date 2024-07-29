@@ -1,12 +1,17 @@
 const std = @import("std");
 const style = @import("../utils/style.zig").Style;
 const http = @import("../utils/http.zig");
+const parser = @import("../utils/parser.zig");
 
-const CoinsData = struct {
+const TopCoins = struct {
     rank: i64,
     code: []const u8,
     name: []const u8,
     price: f64,
+};
+
+const TopCoinsData = struct {
+    data: []TopCoins,
 };
 
 pub fn topCoins(limit: u32) !void {
@@ -29,28 +34,14 @@ pub fn topCoins(limit: u32) !void {
         return std.process.exit(0);
     };
 
-    const parsed = try std.json.parseFromSlice(std.json.Value, allocator, response.items, .{});
-    defer parsed.deinit();
+    const value = try parser.json(allocator, TopCoinsData, response.items);
 
-    const response_json = parsed.value.object;
-    const data = response_json.get("data").?;
-    const data_items = data.array.items;
+    for (value.data) |crypto| {
+        const rank = crypto.rank;
+        const code = crypto.code;
+        const name = crypto.name;
+        const price = crypto.price;
 
-    var top_coins = CoinsData{
-        .rank = undefined,
-        .code = undefined,
-        .name = undefined,
-        .price = undefined,
-    };
-
-    for (data_items) |crypto| {
-        const coin = crypto.object;
-        const rank = coin.get("rank").?.integer;
-        const code = coin.get("code").?.string;
-        const name = coin.get("name").?.string;
-        const price = coin.get("price").?.float;
-
-        top_coins = .{ .rank = rank, .code = code, .name = name, .price = price };
-        std.debug.print("{s}{d}. {s}{s} - {s}{s} - {s}{d:.2}${s}\n", .{ style.Magenta, top_coins.rank, style.Cyan, top_coins.code, style.Yellow, top_coins.name, style.Green, top_coins.price, style.Reset });
+        std.debug.print("{s}{d}. {s}{s} - {s}{s} - {s}{d:.2}${s}\n", .{ style.Magenta, rank, style.Cyan, code, style.Yellow, name, style.Green, price, style.Reset });
     }
 }

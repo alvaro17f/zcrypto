@@ -1,10 +1,15 @@
 const std = @import("std");
 const style = @import("../utils/style.zig").Style;
 const http = @import("../utils/http.zig");
+const parser = @import("../utils/parser.zig");
 
-const CoinsData = struct {
+const Search = struct {
     symbol: []const u8,
     name: []const u8,
+};
+
+const SearchData = struct {
+    coins: []Search,
 };
 
 pub fn search(query: []const u8) !void {
@@ -23,28 +28,17 @@ pub fn search(query: []const u8) !void {
         return std.process.exit(0);
     };
 
-    const parsed = try std.json.parseFromSlice(std.json.Value, allocator, response.items, .{});
-    defer parsed.deinit();
+    const value = try parser.json(allocator, SearchData, response.items);
 
-    const response_json = parsed.value.object;
-    const coins = response_json.get("coins").?;
-    const coins_items = coins.array.items;
-
-    for (coins_items) |crypto| {
-        const coin = crypto.object;
-        const symbol = coin.get("symbol").?.string;
-        const name = coin.get("name").?.string;
-
-        const search_results = CoinsData{
-            .symbol = symbol,
-            .name = name,
-        };
+    for (value.coins) |crypto| {
+        const symbol = crypto.symbol;
+        const name = crypto.name;
 
         std.debug.print("{s}{s} - {s}{s}\n{s}", .{
             style.Magenta,
-            search_results.symbol,
+            symbol,
             style.Cyan,
-            search_results.name,
+            name,
             style.Reset,
         });
     }
