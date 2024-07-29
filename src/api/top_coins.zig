@@ -1,5 +1,6 @@
 const std = @import("std");
 const style = @import("../utils/style.zig").Style;
+const http = @import("../utils/http.zig");
 
 const CoinsData = struct {
     rank: i64,
@@ -17,24 +18,18 @@ pub fn topCoins(limit: u32) !void {
     defer arena.deinit();
     const allocator = arena.allocator();
 
-    var body = std.ArrayList(u8).init(allocator);
-    defer body.deinit();
-
-    var client = std.http.Client{ .allocator = allocator };
-    defer client.deinit();
-
     const URL = try std.fmt.allocPrint(allocator, "https://http-api.livecoinwatch.com/coins?offset=0&limit={d}&sort=rank&order=ascending&currency=USD", .{limit});
 
-    _ = client.fetch(.{
-        .location = .{ .url = URL },
-        .response_storage = .{ .dynamic = &body },
-    }) catch {
+    var response = std.ArrayList(u8).init(allocator);
+    defer response.deinit();
+
+    _ = http.fetch(&response, std.http.Method.GET, URL) catch {
         std.debug.print("{s}\nError: unable to fetch the latest top coins. Try again later please.\n{s}", .{ style.Red, style.Reset });
 
         return std.process.exit(0);
     };
 
-    const parsed = try std.json.parseFromSlice(std.json.Value, allocator, body.items, .{});
+    const parsed = try std.json.parseFromSlice(std.json.Value, allocator, response.items, .{});
     defer parsed.deinit();
 
     const response_json = parsed.value.object;
